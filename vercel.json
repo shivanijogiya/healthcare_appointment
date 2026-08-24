@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm run build:packages && cd apps/web && npm run build",
+  "buildCommand": "npm install && node_modules/.bin/tsc -p packages/types/tsconfig.json && cd apps/web && npm run build",
   "outputDirectory": "apps/web/dist",
   "installCommand": "npm install",
   "framework": null,
