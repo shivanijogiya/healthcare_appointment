@@ -1,0 +1,88 @@
+services:
+  - type: web
+    name: ham-api
+    runtime: node
+    region: oregon
+    plan: free
+    rootDir: .
+    buildCommand: npm install && npm run build:packages && cd apps/api && npx nest build
+    startCommand: node apps/api/dist/main.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: APP_URL
+        fromService:
+          type: web
+          name: ham-web
+          property: host
+          transform: "https://{value}"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ham-postgres
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: ham-redis
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: ENCRYPTION_KEY
+        generateValue: true
+      - key: LLM_PROVIDER
+        value: mock
+      - key: MAIL_TRANSPORT
+        value: file
+      - key: CLINIC_TIMEZONE_OFFSET_MINUTES
+        value: 330
+
+  - type: worker
+    name: ham-worker
+    runtime: node
+    region: oregon
+    plan: free
+    rootDir: .
+    buildCommand: npm install && npm run build:packages && cd apps/api && npx nest build
+    startCommand: node apps/api/dist/worker.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ham-postgres
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: ham-redis
+          property: connectionString
+      - key: JWT_SECRET
+        sync: false
+      - key: JWT_REFRESH_SECRET
+        sync: false
+      - key: ENCRYPTION_KEY
+        sync: false
+      - key: LLM_PROVIDER
+        value: mock
+      - key: MAIL_TRANSPORT
+        value: file
+      - key: CLINIC_TIMEZONE_OFFSET_MINUTES
+        value: 330
+
+databases:
+  - name: ham-postgres
+    databaseName: ham
+    user: ham
+    plan: free
+    region: oregon
+    postgresMajorVersion: 16
+
+  - name: ham-redis
+    plan: free
+    region: oregon
+    ipAllowList: []
