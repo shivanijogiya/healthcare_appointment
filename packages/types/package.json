@@ -4,6 +4,11 @@
   "private": true,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "scripts": { "build": "tsc -p tsconfig.json" },
-  "devDependencies": { "typescript": "^5.7.3" }
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "typescript": "^5.7.3"
+  }
 }

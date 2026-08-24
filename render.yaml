@@ -5,7 +5,7 @@ services:
     region: oregon
     plan: free
     rootDir: .
-    buildCommand: npm install && npm run build:packages && cd apps/api && npx nest build
+    buildCommand: npm install --include=dev && npm run build:packages && cd apps/api && npx nest build
     startCommand: node apps/api/dist/main.js
     healthCheckPath: /health
     envVars:
@@ -47,7 +47,7 @@ services:
     region: oregon
     plan: free
     rootDir: .
-    buildCommand: npm install && npm run build:packages && cd apps/api && npx nest build
+    buildCommand: npm install --include=dev && npm run build:packages && cd apps/api && npx nest build
     startCommand: node apps/api/dist/worker.js
     envVars:
       - key: NODE_ENV
