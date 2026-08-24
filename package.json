@@ -10,7 +10,6 @@
   ],
   "scripts": {
     "build:packages": "node_modules/.bin/tsc -p packages/types/tsconfig.json && node_modules/.bin/tsc -p packages/db/tsconfig.json",
-    "prepare": "npm run build:packages",
     "build": "npm run build:packages && npm run build -w @ham/api && npm run build -w @ham/web",
     "migrate": "npm run migrate -w @ham/db",
     "seed": "npm run seed -w @ham/db",
@@ -20,9 +19,7 @@
     "dev:api": "npm run dev -w @ham/api",
     "dev:worker": "npm run dev:worker -w @ham/api",
     "dev:web": "npm run dev -w @ham/web",
-    "predev": "npm run build:packages",
     "dev": "concurrently -n api,worker,web -c cyan,magenta,green \"npm:dev:api\" \"npm:dev:worker\" \"npm:dev:web\"",
-    "pretest": "npm run build:packages",
     "test": "npm run test -w @ham/api",
     "test:unit": "npm run test -w @ham/api",
     "test:e2e": "node tests/e2e-smoke.mjs",
@@ -30,7 +27,6 @@
     "test:concurrency": "node tests/concurrency.mjs 50",
     "test:failure": "node tests/failure-injection.mjs",
     "test:all": "npm run test:unit && npm run test:e2e && npm run test:leave && npm run test:concurrency",
-    "prebuild": "npm run build:packages",
     "render:build": "bash scripts/render-build.sh"
   },
   "devDependencies": {

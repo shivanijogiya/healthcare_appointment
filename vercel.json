@@ -1,7 +1,7 @@
 {
-  "buildCommand": "npm install && node_modules/.bin/tsc -p packages/types/tsconfig.json && cd apps/web && npm run build",
+  "buildCommand": "npm install --include=dev && node_modules/.bin/tsc -p packages/types/tsconfig.json && node_modules/.bin/tsc -p packages/db/tsconfig.json && cd apps/web && ../node_modules/.bin/vite build",
   "outputDirectory": "apps/web/dist",
-  "installCommand": "npm install",
+  "installCommand": "echo 'skip'",
   "framework": null,
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
