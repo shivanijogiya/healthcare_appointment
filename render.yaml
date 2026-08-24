@@ -6,7 +6,7 @@ services:
     plan: free
     rootDir: .
     buildCommand: npm run render:build
-    startCommand: node apps/api/dist/main.js
+    startCommand: bash scripts/start.sh
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
