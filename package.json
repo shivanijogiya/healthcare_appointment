@@ -34,14 +34,14 @@
     "render:build": "bash scripts/render-build.sh"
   },
   "devDependencies": {
-    "concurrently": "^9.1.2",
-    "typescript": "^5.7.3",
-    "@nestjs/cli": "^10.4.9"
+    "concurrently": "^9.1.2"
   },
   "engines": {
     "node": ">=20"
   },
   "dependencies": {
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "@nestjs/cli": "^10.4.9",
+    "@nestjs/schematics": "^10.2.3"
   }
 }
