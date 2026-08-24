@@ -3,7 +3,7 @@ import { Pool, types } from 'pg';
 import type { Database } from './schema';
 
 // numeric(10,2) -> keep as string to avoid float drift on money; callers parse.
-types.setTypeParser(1700, (v) => v);
+types.setTypeParser(1700, (v: string) => v);
 
 export type Db = Kysely<Database>;
 
