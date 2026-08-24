@@ -24,7 +24,7 @@ const schema = z.object({
     .string()
     .default('0'.repeat(64)), // 32-byte hex
 
-  LLM_PROVIDER: z.enum(['anthropic', 'openai', 'mock', 'failing']).default('mock'),
+  LLM_PROVIDER: z.string().transform(v => (['anthropic','openai','mock','failing'].includes(v) ? v : 'mock')).pipe(z.enum(['anthropic', 'openai', 'mock', 'failing'])).default('mock'),
   LLM_API_KEY: z.string().optional(),
   LLM_MODEL: z.string().default('claude-sonnet-4-5'),
   LLM_BASE_URL: z.string().optional(),
