@@ -15,8 +15,6 @@ services:
         value: 10000
       - key: CLINIC_TIMEZONE_OFFSET_MINUTES
         value: "330"
-      - key: LLM_PROVIDER
-        value: mock
       - key: MAIL_TRANSPORT
         value: file
       - key: JWT_SECRET
@@ -48,8 +46,6 @@ services:
         value: production
       - key: CLINIC_TIMEZONE_OFFSET_MINUTES
         value: "330"
-      - key: LLM_PROVIDER
-        value: mock
       - key: MAIL_TRANSPORT
         value: file
       - key: JWT_SECRET
