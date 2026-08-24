@@ -9,7 +9,7 @@
     "apps/web"
   ],
   "scripts": {
-    "build:packages": "npm run build -w @ham/types && npm run build -w @ham/db",
+    "build:packages": "node_modules/.bin/tsc -p packages/types/tsconfig.json && node_modules/.bin/tsc -p packages/db/tsconfig.json",
     "prepare": "npm run build:packages",
     "build": "npm run build:packages && npm run build -w @ham/api && npm run build -w @ham/web",
     "migrate": "npm run migrate -w @ham/db",
@@ -29,13 +29,19 @@
     "test:leave": "node tests/leave.mjs",
     "test:concurrency": "node tests/concurrency.mjs 50",
     "test:failure": "node tests/failure-injection.mjs",
-    "test:all": "npm run test:unit && npm run test:e2e && npm run test:leave && npm run test:concurrency"
+    "test:all": "npm run test:unit && npm run test:e2e && npm run test:leave && npm run test:concurrency",
+    "prebuild": "npm run build:packages",
+    "render:build": "bash scripts/render-build.sh"
   },
   "devDependencies": {
     "concurrently": "^9.1.2",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "@nestjs/cli": "^10.4.9"
   },
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "typescript": "^5.7.3"
   }
 }
